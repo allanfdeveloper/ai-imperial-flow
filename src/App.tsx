@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -10,8 +9,10 @@ import Dashboard from "./pages/Dashboard";
 import Clients from "./pages/Clients";
 import Automations from "./pages/Automations";
 import NotFound from "./pages/NotFound";
+import Pipelines from "./pages/Pipelines";
+import Invoices from "./pages/Invoices";
+import Settings from "./pages/Settings";
 
-// Create a client
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -33,9 +34,24 @@ const App = () => {
                   <Clients />
                 </AppLayout>
               } />
+              <Route path="/pipelines" element={
+                <AppLayout>
+                  <Pipelines />
+                </AppLayout>
+              } />
               <Route path="/automations" element={
                 <AppLayout>
                   <Automations />
+                </AppLayout>
+              } />
+              <Route path="/invoices" element={
+                <AppLayout>
+                  <Invoices />
+                </AppLayout>
+              } />
+              <Route path="/settings" element={
+                <AppLayout>
+                  <Settings />
                 </AppLayout>
               } />
               <Route path="*" element={<NotFound />} />

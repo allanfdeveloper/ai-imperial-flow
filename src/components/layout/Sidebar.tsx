@@ -5,7 +5,8 @@ import { cn } from '@/lib/utils';
 import { 
   LayoutDashboard, 
   Users, 
-  LineChart, 
+  // change: use correct icons from allowed list
+  LineChart as LayoutList, 
   Zap, 
   FileText,
   Settings, 
@@ -33,7 +34,7 @@ const navItems: NavItem[] = [
     href: '/clients',
   },
   {
-    icon: LineChart,
+    icon: LayoutList,
     label: 'Pipelines',
     href: '/pipelines',
   },
