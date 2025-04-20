@@ -7,12 +7,13 @@ interface StatCardProps {
   title: string;
   value: string | number;
   description?: string;
-  trend?: number;
+  trend?: string | number;
+  trendType?: 'increase' | 'decrease' | 'neutral';
   icon?: React.ReactNode;
   className?: string;
 }
 
-export function StatCard({ title, value, description, trend, icon, className }: StatCardProps) {
+export function StatCard({ title, value, description, trend, trendType, icon, className }: StatCardProps) {
   return (
     <Card className={cn('overflow-hidden', className)}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -27,15 +28,17 @@ export function StatCard({ title, value, description, trend, icon, className }: 
               <div 
                 className={cn(
                   "flex items-center mr-2",
-                  trend > 0 ? "text-green-500" : "text-red-500"
+                  trendType === 'increase' ? "text-green-500" : 
+                  trendType === 'decrease' ? "text-red-500" : 
+                  "text-muted-foreground"
                 )}
               >
-                {trend > 0 ? (
+                {trendType === 'increase' ? (
                   <ArrowUpRight className="h-3 w-3 mr-1" />
-                ) : (
+                ) : trendType === 'decrease' ? (
                   <ArrowDownRight className="h-3 w-3 mr-1" />
-                )}
-                <span>{Math.abs(trend)}%</span>
+                ) : null}
+                <span>{trend}</span>
               </div>
             )}
             {description && <p>{description}</p>}
