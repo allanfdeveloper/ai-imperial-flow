@@ -165,6 +165,37 @@ const Dashboard = () => {
     },
   ];
 
+  // Sample clients data for the ClientsWidget component
+  const clientsData = [
+    {
+      id: "client1",
+      name: "Jane Smith",
+      company: "TechCorp",
+      avatar: undefined,
+      status: "active" as const,
+      lastContact: "2 days ago",
+      value: "$15,000",
+    },
+    {
+      id: "client2",
+      name: "Michael Brown",
+      company: "GlobalSystems",
+      avatar: undefined,
+      status: "active" as const,
+      lastContact: "Yesterday",
+      value: "$8,500",
+    },
+    {
+      id: "client3",
+      name: "Sarah Davis",
+      company: "DataStream Inc.",
+      avatar: undefined,
+      status: "lead" as const,
+      lastContact: "Today",
+      value: "$12,000",
+    },
+  ];
+
   const handleTaskToggle = (id: string, completed: boolean) => {
     console.log(`Task ${id} toggled to ${completed}`);
     // In a real app, this would update the task in the database
@@ -179,30 +210,30 @@ const Dashboard = () => {
         <StatCard
           title="Active Clients"
           value="28"
-          change="+4"
+          trend="+4"
           icon={<Users className="h-8 w-8" />}
-          changeType="increase"
+          trendType="increase"
         />
         <StatCard
           title="Meetings this week"
           value="12"
-          change="-2"
+          trend="-2"
           icon={<Calendar className="h-8 w-8" />}
-          changeType="decrease"
+          trendType="decrease"
         />
         <StatCard
           title="Avg Deal Value"
           value="$45,500"
-          change="+12%"
+          trend="+12%"
           icon={<TrendingUp className="h-8 w-8" />}
-          changeType="increase"
+          trendType="increase"
         />
         <StatCard
           title="Active Automations"
           value="8"
-          change="+2"
+          trend="+2"
           icon={<RefreshCw className="h-8 w-8" />}
-          changeType="increase"
+          trendType="increase"
         />
       </div>
 
@@ -213,7 +244,7 @@ const Dashboard = () => {
         </div>
         <div className="space-y-4">
           <TaskList tasks={tasks} onTaskToggle={handleTaskToggle} />
-          <ClientsWidget />
+          <ClientsWidget clients={clientsData} />
         </div>
       </div>
     </PageContainer>
