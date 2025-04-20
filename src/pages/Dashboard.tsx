@@ -1,165 +1,223 @@
 
-import React from 'react';
-import { PageContainer } from '@/components/layout/PageContainer';
-import { StatCard } from '@/components/dashboard/StatCard';
-import { TaskList } from '@/components/dashboard/TaskList';
-import { ActivityFeed } from '@/components/dashboard/ActivityFeed';
-import { AIInsights } from '@/components/dashboard/AIInsights';
-import { ClientsWidget } from '@/components/dashboard/ClientsWidget';
-import { BarChart3, Users, DollarSign, FileText, Zap } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React from "react";
+import { PageContainer } from "@/components/layout/PageContainer";
+import { StatCard } from "@/components/dashboard/StatCard";
+import { TaskList } from "@/components/dashboard/TaskList";
+import { ActivityFeed } from "@/components/dashboard/ActivityFeed";
+import { AIInsights } from "@/components/dashboard/AIInsights";
+import { ClientsWidget } from "@/components/dashboard/ClientsWidget";
+import { Users, Calendar, TrendingUp, RefreshCw } from "lucide-react";
+
+type InsightType = "opportunity" | "risk" | "suggestion";
+type ActivityType = "note" | "email" | "call" | "meeting";
+
+interface Insight {
+  id: string;
+  type: InsightType;
+  title: string;
+  description: string;
+  client: {
+    name: string;
+    value?: string;
+  };
+}
+
+interface Activity {
+  id: string;
+  type: ActivityType;
+  title: string;
+  description?: string;
+  time: string;
+  user: {
+    name: string;
+  };
+  client: {
+    name: string;
+  };
+}
+
+interface Task {
+  id: string;
+  title: string;
+  completed: boolean;
+  dueDate?: string;
+  aiGenerated?: boolean;
+}
 
 const Dashboard = () => {
-  // Sample data - in a real app this would come from API calls
-  const tasks = [
-    { id: '1', title: 'Follow up with Jane Smith about proposal', dueDate: 'Today', completed: false, aiGenerated: true },
-    { id: '2', title: 'Prepare quarterly review for TechCorp', dueDate: 'Tomorrow', completed: false },
-    { id: '3', title: 'Schedule demo with potential client', dueDate: '2 days', completed: false, aiGenerated: true },
-    { id: '4', title: 'Update client onboarding documents', completed: true },
-  ];
-
-  const activities = [
+  const tasks: Task[] = [
     {
-      id: '1',
-      type: 'email',
-      title: 'Email sent to Acme Corp',
-      description: 'Proposal for the new project sent',
-      time: '2 hours ago',
-      user: { name: 'John Doe' },
-      client: { name: 'Acme Corp' },
+      id: "task1",
+      title: "Follow up with TechCorp about project timeline",
+      completed: false,
+      dueDate: "Today",
     },
     {
-      id: '2',
-      type: 'call',
-      title: 'Call with GlobalTech',
-      description: 'Discussed implementation timeline and next steps',
-      time: 'Yesterday',
-      user: { name: 'John Doe' },
-      client: { name: 'GlobalTech' },
+      id: "task2",
+      title: "Review proposal for GlobalSystems",
+      completed: false,
+      dueDate: "Tomorrow",
     },
     {
-      id: '3',
-      type: 'meeting',
-      title: 'Project kickoff meeting',
-      time: '3 days ago',
-      user: { name: 'John Doe' },
-      client: { name: 'DataSystems Inc.' },
+      id: "task3",
+      title: "Send invoice to DataStream Inc",
+      completed: true,
+    },
+    {
+      id: "task4",
+      title: "Schedule demo with NorthStar Ventures",
+      completed: false,
+      dueDate: "Apr 23",
+      aiGenerated: true,
+    },
+    {
+      id: "task5",
+      title: "Update client onboarding documentation",
+      completed: false,
     },
   ];
 
-  const insights = [
+  const insights: Insight[] = [
     {
-      id: '1',
-      type: 'opportunity',
-      title: 'Upsell opportunity detected',
-      description: 'TechCorp has shown interest in additional services based on recent communications.',
-      client: { name: 'TechCorp', value: '$5,000' },
+      id: "insight1",
+      type: "opportunity",
+      title: "Potential upsell opportunity",
+      description:
+        "TechCorp has shown interest in our advanced automation package based on recent conversations.",
+      client: {
+        name: "TechCorp",
+        value: "$15,000",
+      },
     },
     {
-      id: '2',
-      type: 'risk',
-      title: 'Client engagement decreasing',
-      description: 'No communication with Acme Corp in the last 30 days. Consider reaching out soon.',
-      client: { name: 'Acme Corp' },
+      id: "insight2",
+      type: "risk",
+      title: "Engagement risk detected",
+      description:
+        "NorthStar Ventures hasn't responded to our last 3 emails. Consider a direct call.",
+      client: {
+        name: "NorthStar Ventures",
+      },
     },
     {
-      id: '3',
-      type: 'suggestion',
-      title: 'Follow-up recommended',
-      description: 'The proposal sent to GlobalTech has not received a response in 5 days.',
-      client: { name: 'GlobalTech', value: '$12,500' },
+      id: "insight3",
+      type: "suggestion",
+      title: "Client success story potential",
+      description:
+        "DataStream Inc achieved 40% efficiency improvement. Request a testimonial.",
+      client: {
+        name: "DataStream Inc",
+      },
     },
   ];
 
-  const clients = [
+  const activities: Activity[] = [
     {
-      id: '1',
-      name: 'Jane Smith',
-      company: 'TechCorp',
-      status: 'active' as const,
-      lastContact: '2 days ago',
-      value: '$15,000',
+      id: "activity1",
+      type: "email",
+      title: "Sent project timeline update",
+      description: "Included revised milestones and delivery dates",
+      time: "2 hours ago",
+      user: {
+        name: "Jane Cooper",
+      },
+      client: {
+        name: "TechCorp",
+      },
     },
     {
-      id: '2',
-      name: 'Michael Johnson',
-      company: 'Acme Corp',
-      status: 'active' as const,
-      lastContact: '1 week ago',
-      value: '$8,500',
+      id: "activity2",
+      type: "call",
+      title: "Discovery call",
+      time: "Yesterday",
+      user: {
+        name: "Jane Cooper",
+      },
+      client: {
+        name: "GlobalSystems",
+      },
     },
     {
-      id: '3',
-      name: 'Sarah Williams',
-      company: 'GlobalTech',
-      status: 'lead' as const,
-      lastContact: '3 days ago',
-      value: '$12,500',
+      id: "activity3",
+      type: "meeting",
+      title: "Demo presentation",
+      description: "Showcased workflow automation features",
+      time: "2 days ago",
+      user: {
+        name: "Jane Cooper",
+      },
+      client: {
+        name: "DataStream Inc",
+      },
     },
     {
-      id: '4',
-      name: 'David Brown',
-      company: 'DataSystems Inc.',
-      status: 'active' as const,
-      lastContact: 'Today',
-      value: '$7,200',
+      id: "activity4",
+      type: "note",
+      title: "Follow-up items",
+      description: "Send additional information on API integrations",
+      time: "Apr 15",
+      user: {
+        name: "Jane Cooper",
+      },
+      client: {
+        name: "NorthStar Ventures",
+      },
     },
   ];
+
+  const handleTaskToggle = (id: string, completed: boolean) => {
+    console.log(`Task ${id} toggled to ${completed}`);
+    // In a real app, this would update the task in the database
+  };
 
   return (
     <PageContainer
       title="Dashboard"
-      description="Overview of your clients, tasks, and opportunities."
-      actions={
-        <Button className="bg-imperial-500 hover:bg-imperial-600">
-          <Zap className="mr-2 h-4 w-4" />
-          Run AI Assistant
-        </Button>
-      }
+      description="Your business at a glance"
     >
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <StatCard 
-          title="Total Clients" 
-          value="28" 
-          trend={12} 
-          description="vs. last month" 
-          icon={<Users className="h-4 w-4 text-muted-foreground" />} 
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+        <StatCard
+          title="Active Clients"
+          value="28"
+          change="+4"
+          icon={<Users className="h-8 w-8" />}
+          changeType="increase"
         />
-        <StatCard 
-          title="Active Deals" 
-          value="18" 
-          trend={5} 
-          description="vs. last month" 
-          icon={<BarChart3 className="h-4 w-4 text-muted-foreground" />} 
+        <StatCard
+          title="Meetings this week"
+          value="12"
+          change="-2"
+          icon={<Calendar className="h-8 w-8" />}
+          changeType="decrease"
         />
-        <StatCard 
-          title="Revenue" 
-          value="$58,400" 
-          trend={-3} 
-          description="vs. last month" 
-          icon={<DollarSign className="h-4 w-4 text-muted-foreground" />} 
+        <StatCard
+          title="Avg Deal Value"
+          value="$45,500"
+          change="+12%"
+          icon={<TrendingUp className="h-8 w-8" />}
+          changeType="increase"
         />
-        <StatCard 
-          title="Proposals" 
-          value="12" 
-          trend={8} 
-          description="vs. last month" 
-          icon={<FileText className="h-4 w-4 text-muted-foreground" />} 
+        <StatCard
+          title="Active Automations"
+          value="8"
+          change="+2"
+          icon={<RefreshCw className="h-8 w-8" />}
+          changeType="increase"
         />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-6">
-        <div className="space-y-6 lg:col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="lg:col-span-2 space-y-4">
           <AIInsights insights={insights} />
           <ActivityFeed activities={activities} />
         </div>
-        <div className="space-y-6">
-          <ClientsWidget clients={clients} />
-          <TaskList tasks={tasks} onTaskToggle={(id, completed) => console.log('Task toggled:', id, completed)} />
+        <div className="space-y-4">
+          <TaskList tasks={tasks} onTaskToggle={handleTaskToggle} />
+          <ClientsWidget />
         </div>
       </div>
     </PageContainer>
   );
-}
+};
 
 export default Dashboard;
