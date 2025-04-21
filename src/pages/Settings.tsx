@@ -5,6 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
+/**
+ * Settings page for user account and preferences.
+ * Allows editing user info and toggling settings like notifications and dark mode.
+ */
+
 const Settings = () => (
   <div className="max-w-xl mx-auto p-8">
     <h1 className="text-3xl font-semibold mb-6 text-center">Settings</h1>

@@ -5,11 +5,14 @@ import { cn } from '@/lib/utils';
 import { 
   LayoutDashboard, 
   Users, 
-  // change: use correct icons from allowed list
-  LineChart as LayoutList, 
-  Zap, 
-  FileText,
-  Settings, 
+  bell,
+  lead,
+  contact,
+  organization,
+  note,
+  task,
+  callLog,
+  emailTemplate,
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
@@ -29,27 +32,62 @@ const navItems: NavItem[] = [
     href: '/',
   },
   {
-    icon: Users,
-    label: 'Clients',
-    href: '/clients',
+    icon: lead,
+    label: 'Leads',
+    href: '/leads',
   },
   {
-    icon: LayoutList,
+    icon: task,
+    label: 'Deals',
+    href: '/pipelines',
+  },
+  {
+    icon: contact,
+    label: 'Contacts',
+    href: '/contacts',
+  },
+  {
+    icon: organization,
+    label: 'Organizations',
+    href: '/organizations',
+  },
+  {
+    icon: note,
+    label: 'Notes',
+    href: '/notes',
+  },
+  {
+    icon: task,
+    label: 'Tasks',
+    href: '/tasks',
+  },
+  {
+    icon: callLog,
+    label: 'Call Logs',
+    href: '/call-logs',
+  },
+  {
+    icon: emailTemplate,
+    label: 'Email Templates',
+    href: '/email-templates',
+  },
+  {
+    icon: bell,
+    label: 'Notifications',
+    href: '/notifications',
+  },
+  {
+    icon: note,
     label: 'Pipelines',
     href: '/pipelines',
   },
   {
-    icon: Zap,
-    label: 'Automations',
-    href: '/automations',
-  },
-  {
-    icon: FileText,
+    icon: note,
     label: 'Invoices',
     href: '/invoices',
   },
   {
-    icon: Settings,
+    icon: note,
     label: 'Settings',
     href: '/settings',
   },
@@ -124,3 +162,4 @@ export function Sidebar() {
     </div>
   );
 }
+
