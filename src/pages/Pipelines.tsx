@@ -1,6 +1,5 @@
-
 import React from "react";
-import { lead, task } from "lucide-react";
+import { FileText, CheckSquare } from "lucide-react";
 
 /**
  * This page will represent "Deals" (Pipelines) as mentioned in the image.
